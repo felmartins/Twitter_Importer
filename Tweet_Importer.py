@@ -15,13 +15,9 @@ import gzip
 from urllib import request
 import sqlite3
 from sqlite3 import Error
+from credentials import consumer_key, consumer_secret, access_token, access_token_secret
 
 #os.chdir('/home/pi/clusterfs/Twitter')
-
-consumer_key= ""
-consumer_secret = ""
-access_token = ""
-access_token_secret= ""
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -164,7 +160,7 @@ def cleanup(dirty_db):
     return cleandb
 
 ### Processed collected information from Tweet ID`s in batches, then sends the data to the SQL database.
-def process_tweets(ids, batchsize = 100, batch = 1, logday = None):
+def process_tweets(ids, batchsize = 1000, batch = 1, logday = None):
     tt = time.process_time()
     start = (batchsize * batch) - batchsize
     end = (batchsize * batch) - 1
